@@ -10,8 +10,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 //Importar las rutas de la aplicacion 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./bin/routes/index');
+var usersRouter = require('./bin/routes/users');
 
 //Crea la aplicacion express
 var app = express();
@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //Configurar la carpeta publica para servir archivos estaticos
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..' , 'public')));
 
 //Registrar las rutas de la aplicacion
 app.use('/', indexRouter);
