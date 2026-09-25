@@ -12,7 +12,7 @@ import createDebug from "debug"
 import http from 'node:http'
 
 // Creacion del objeto Debug
-const debug = createDebug('desarrollo-web-ssr:server')
+const debug = createDebug('dwssr-2026b:server')
 
 /**
  * Get port from environment and store in Express.
