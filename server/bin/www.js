@@ -4,13 +4,15 @@
  * Module dependencies.
  */
 
-import app from ('../app');
-//importando Debug 
+import app from '../app.js'
+// Importantando Debug
 import createDebug from "debug"
+// var debug = require('debug')('desarrollo-web-ssr:server');
+
 import http from 'node:http'
 
-//creacion de Debug
-const debug = createDebug('dwssr-2026b:server')
+// Creacion del objeto Debug
+const debug = createDebug('desarrollo-web-ssr:server')
 
 /**
  * Get port from environment and store in Express.
@@ -63,13 +65,13 @@ function onError(error) {
   }
 
   const bind = typeof port === 'string'
-    ? `Pipe ${port}` //'Pipe ' + port
-    : `Port ${port}`//Port ' + port;
+    ? `Pipe ${port}`
+    : `Port ${port}`
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
@@ -90,5 +92,5 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? `pipe ${addr}`
     : `port ${addr.port}`
-  debug('💻Listening on ' + bind);
+  debug(`💻 Listening on ${bind}`);
 }
