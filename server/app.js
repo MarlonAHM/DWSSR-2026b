@@ -4,14 +4,19 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import createDebug from 'debug';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
+import {dirname} from 'node:path'
+//importando el template engine handlebars
+import hbs from 'hbs'
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
+//importando el registrador de helper 
+import { registerViteHelper } from './lib/vite.js';
 
 // __dirname no existe por defecto en ES modules, hay que recrearlo
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
 const debug = createDebug('dwssr-2026b:server');
 
@@ -20,11 +25,18 @@ debug('✨ Creando backend');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+//registro helper
+registerViteHelper(hbs);
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//archivs estaticos para produccion
+if(process.env.NODE_ENV == 'production'){
+  app.use(express.static(path.join(__dirname, 'dist')));
+}
 
 debug('📁 Creando servidor de Archivos Estáticos');
 app.use(express.static(path.join(__dirname, 'public')));
