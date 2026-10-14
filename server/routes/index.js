@@ -5,7 +5,7 @@ let counter = 0;
 let numbers = []; // Declaramos el arreglo aquí
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res, _next) {
   counter++;
   numbers.push(counter);
   res.render('index', { title: 'Marlon Herrera',

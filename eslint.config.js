@@ -22,6 +22,11 @@ export default defineConfig([
           } 
         } 
       },
+     {
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+  }
+},
 //2.1) Configuacion de vite
   { files: ["vite.config.js"],
      plugins: { js },

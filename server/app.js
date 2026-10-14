@@ -45,15 +45,25 @@ debug('🔀 Registrando rutas');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use(function(req, res, next) {
+app.use(function(req, res, _next) {
   next(createError(404));
 });
 
-app.use(function(err, req, res, next) {
+//Manejador de errores
+
+app.use(function(err, req, res, _next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);
   res.render('error');
 });
 
+//ejemplo de codigo inalcanzable
+//(()=>{
+//let age = 10
+//return age
+//if(age == 10){
+  //console.log("codigo")
+//}
+// })()
 export default app;
