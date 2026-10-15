@@ -3,6 +3,8 @@ import fs from 'node:fs'
 //biblioteca de rutas
 import path from  'node:path'
 import { fileURLToPath } from 'url';
+// eslint-disable-next-line
+import {dirname} from 'node:path';
 //creando variables de rutas 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);  
@@ -11,6 +13,7 @@ const __dirname = path.dirname(__filename);
  * EN DESAROLLO: conecta al servidor de desarrollo de vite 
  * EN PRODUCCIÓN: usa los compilados vite 
  */
+
 export function viteAssets() {
     //obtener modo de ejecucion
     const isDev = process.env.NODE_ENV !== 'production';

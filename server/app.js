@@ -1,10 +1,11 @@
 import createError from 'http-errors';
 import express from 'express';
-import path from 'path';
+import path from 'node:path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import createDebug from 'debug';
 import { fileURLToPath } from 'node:url';
+// eslint-disable-next-line
 import {dirname} from 'node:path'
 //importando el template engine handlebars
 import hbs from 'hbs'
@@ -45,13 +46,13 @@ debug('🔀 Registrando rutas');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use(function(req, res, _next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 //Manejador de errores
 
-app.use(function(err, req, res, _next) {
+app.use((err, req, res, _next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);
