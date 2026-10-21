@@ -65,5 +65,13 @@ export default defineConfig([
           } 
         } 
       },
-      
+          //5) Reglas de formato corregibles automáticamente (Auto Fix)
+  {
+    files: ["src/**/*.{js,mjs}"],
+    rules: {
+      semi: ["error", "always"],
+      quotes: ["error", "double"],
+      indent: ["error", 2]
+    }
+  }
 ]);
