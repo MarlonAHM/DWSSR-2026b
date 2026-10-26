@@ -1,12 +1,13 @@
 // const express = require('express');
-import express from 'express'
-const router = express.Router();
+import express from 'express';
+
+const usersRouter = express.Router();
 
 /* GET users listing. */
-// eslint-disable-next-line
-router.get('/', function(req, res, next) {
-  res.send('<h1 style="color:red">LISTA DE AMIGOS</h1>');
+
+usersRouter.get('/', (req, res, _next) => {
+  res.send('<h1 style="color:red"> LISTA DE AMIGOS Y EXES</h1>');
 });
 
 // module.exports = router;
-export default router;
+export default usersRouter;

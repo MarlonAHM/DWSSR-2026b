@@ -1,18 +1,18 @@
 import createError from 'http-errors';
 import express from 'express';
-import path from 'node:path';
+
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import createDebug from 'debug';
 import { fileURLToPath } from 'node:url';
-// eslint-disable-next-line
-import {dirname} from 'node:path'
-//importando el template engine handlebars
-import hbs from 'hbs'
 
-import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.js';
-//importando el registrador de helper 
+import { dirname, path } from 'node:path';
+//importando el template engine handlebars
+import hbs from 'hbs';
+
+import indexRouter from '#routes/index.js';
+import usersRouter from '#routes/users.js';
+//importando el registrador de helper
 import { registerViteHelper } from './lib/vite.js';
 
 // __dirname no existe por defecto en ES modules, hay que recrearlo
@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //archivs estaticos para produccion
-if(process.env.NODE_ENV == 'production'){
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist')));
 }
 
@@ -64,7 +64,7 @@ app.use((err, req, res, _next) => {
 //let age = 10
 //return age
 //if(age == 10){
-  //console.log("codigo")
+//console.log("codigo")
 //}
 // })()
 export default app;

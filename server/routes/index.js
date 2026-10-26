@@ -1,19 +1,19 @@
-import express from 'express'
-const router = express.Router();
+import express from 'express';
+
+const indexRouter = express.Router();
 
 let counter = 0;
-let numbers = []; // Declaramos el arreglo aquí
+const numbers = []; // Declaramos el arreglo aquí
 
 /* GET home page. */
-// eslint-disable-next-line
-router.get('/', function(req, res, next) {
-  counter++;
+indexRouter.get('/', (req, res, _next) => {
+  counter += 1;
   numbers.push(counter);
-  res.render('index', { 
+  res.render('index', {
     title: 'Marlon Herrera',
     counter,
-    numbers
+    numbers,
   });
 });
 
-export default router;
+export default indexRouter;

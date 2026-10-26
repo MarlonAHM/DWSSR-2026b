@@ -12,7 +12,10 @@
 
   //Auto Fix al guardar
   "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
     "source.fixAll": "always"
-  }
+  },
+  
+  "editor.formatOnSave": true
 }
  
