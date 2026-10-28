@@ -2,7 +2,7 @@ import createError from 'http-errors';
 import express from 'express';
 
 import cookieParser from 'cookie-parser';
-import logger from 'morgan';
+import morgan from 'morgan';
 import createDebug from 'debug';
 import { fileURLToPath } from 'node:url';
 
@@ -29,7 +29,7 @@ app.set('view engine', 'hbs');
 //registro helper
 registerViteHelper(hbs);
 
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
