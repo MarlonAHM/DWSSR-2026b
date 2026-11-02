@@ -4,7 +4,7 @@ import fs from 'node:fs';
 
 import { fileURLToPath } from 'url';
 // eslint-disable-next-line
-import { dirname, path } from 'node:path';
+import path, { dirname } from 'node:path';
 
 import createDebug from 'debug';
 

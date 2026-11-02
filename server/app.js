@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import createDebug from 'debug';
 import { fileURLToPath } from 'node:url';
 
-import { dirname, path } from 'node:path';
+import path, { dirname } from 'node:path';
 //importando el template engine handlebars
 import hbs from 'hbs';
 
@@ -14,6 +14,9 @@ import indexRouter from '#routes/index.js';
 import usersRouter from '#routes/users.js';
 //importando el registrador de helper
 import { registerViteHelper } from './lib/vite.js';
+
+// Importando la configuracion de winston logger
+import logger from './lib/winston.js';
 
 // __dirname no existe por defecto en ES modules, hay que recrearlo
 const __filename = fileURLToPath(import.meta.url);
@@ -29,7 +32,14 @@ app.set('view engine', 'hbs');
 //registro helper
 registerViteHelper(hbs);
 
-app.use(morgan('dev'));
+// Configurar middlewares de la aplicacion
+app.use(
+  morgan('dev', {
+    stream: {
+      write: (msg) => logger.info(msg.trim()),
+    },
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
