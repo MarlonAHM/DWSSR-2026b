@@ -1,20 +1,19 @@
 import createError from 'http-errors';
+//import express from 'express';
+// Importar el framework express
 import express from 'express';
 
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-// import createDebug from 'debug'; // 👈
+// Imports para crear Dirname
 import { fileURLToPath } from 'node:url';
 
 import path, { dirname } from 'node:path';
-//importando el template engine handlebars
-import hbs from 'hbs';
 
 import indexRouter from '#routes/index.js';
 import usersRouter from '#routes/users.js';
-//importando el registrador de helper
-import { registerViteHelper } from './lib/vite.js';
-
+// Importando la funcion de configuracion de Hbs
+import configureHandlebars from './lib/handlebars.js';
 // Importando la configuracion de winston logger
 import logger from './lib/winston.js';
 
@@ -22,16 +21,12 @@ import logger from './lib/winston.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// const debug = createDebug('dwssr-2026b:server'); // 👈
-
-// debug('🔨 Creando backend');
+// Crear la aplicacion express
 logger.info('🔨 Creando backend');
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-//registro helper
-registerViteHelper(hbs);
+// Configurar el motor de vistas con hbs
+configureHandlebars(app);
 
 // Configurar middlewares de la aplicacion
 app.use(
@@ -50,10 +45,9 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist')));
 }
 
-// debug('🔨 Creando servidor de Archivos Estáticos');
+// Registramos las rutas de la aplicacion
 logger.info('🔨 Creando servidor de Archivos Estáticos');
 app.use(express.static(path.join(__dirname, 'public')));
-
 // debug('🛣️ Registrando rutas');
 logger.info('🛣️ Registrando rutas');
 app.use('/', indexRouter);
@@ -72,12 +66,5 @@ app.use((err, req, res, _next) => {
   res.render('error');
 });
 
-//ejemplo de codigo inalcanzable
-//(()=>{
-//let age = 10
-//return age
-//if(age == 10){
-//console.log("codigo")
-//}
-// })()
+// module.exports = app;
 export default app;
